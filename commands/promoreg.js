@@ -1,4 +1,3 @@
-const tokenFile = require("./configs/token.json");
 const loudFoot = require("./configs/footer.json");
 const Discord = require("discord.js");
 const mysql = require("mysql");
