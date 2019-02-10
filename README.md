@@ -1,5 +1,5 @@
-LOUD-Bot
-Development of the LOUD Mining Discord.js bot
+# LOUD-Bot
+Development of the LOUD Mining Discord Bot
 
 If you have any interest in helping with this project please contact one of our admins or myself in our discord server.
 
