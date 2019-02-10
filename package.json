@@ -1,0 +1,18 @@
+{
+  "name": "loud_bot",
+  "version": "1.0.0",
+  "description": "LOUD Mining Stats",
+  "main": "loudbot.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^11.4.2",
+    "snekfetch": "^4.0.4",
+    "sqlite": "^3.0.0",
+    "superagent": "^4.0.0",
+    "uws": "^99.0.0"
+  }
+}
