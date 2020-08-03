@@ -20,16 +20,18 @@ fs.readdir("./commands/", (err, files) => {
 bot.on("ready", function() {
 	console.log(`Awww Shit! Here come's that asshole ${bot.user.tag}`);
 	bot.user.setStatus("LOUDest pool on the BLOCK!");
-	console.log(error);
+	console.error();
 });
 bot.on("message", async message => {
+	prefix = config.prefix;
 	if(message.author.bot) return;
 	if(message.author.bot == "dm") return;
-	prefix = config.prefix;
-	messageArray = message.content.split(" ");
-	cmd = messageArray[0];
-	args = messageArray.slice(1);
-	commandfile = bot.commands.get(cmd.slice(prefix.length));
-	if(commandfile) commandfile.run(bot,message,args);
+	if(message.content.charAt(0) = prefix) {
+		messageArray = message.content.charAt(1).split(" ");
+		cmd = messageArray[0];
+		args = messageArray.slice(1);
+		commandfile = bot.commands.get(cmd);
+		if(commandfile) commandfile.run(bot,message,args);
+	} console.error();
 });
 bot.login(tokenFile.token);
