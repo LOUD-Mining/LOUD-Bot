@@ -19,7 +19,8 @@ fs.readdir("./commands/", (err, files) => {
 });
 bot.on("ready", function() {
 	console.log(`Awww Shit! Here come's that asshole ${bot.user.tag}`);
-	bot.user.setActivity("with Crypto");
+	bot.user.setStatus("LOUDest pool on the BLOCK!");
+	console.log(error);
 });
 bot.on("message", async message => {
 	if(message.author.bot) return;
