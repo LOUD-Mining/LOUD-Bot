@@ -12,7 +12,7 @@ module.exports.run = async (bot, message, args) => {
         let api
 
         function getAPIStats(api) {
-        return Promise.resolve($.ajax({
+            return Promise.resolve($.ajax({
                 url: api,
                 dataType: 'json',
                 type: 'GET' 
@@ -139,4 +139,7 @@ module.exports.run = async (bot, message, args) => {
     message.channel.bulkDelete(1)
     bot.channels.get(config.configs.chID).send(`${message.author} Please command me here thanks`)
     
+}
+module.exports.help = {
+    name: "network"
 }
