@@ -11,13 +11,17 @@ module.exports.run = async (bot, message, args) => {
         .setThumbnail(URL = "https://loudmining.com/media/lm-us.png")
         .addField("<help", "This help message")
         .addField("<pools", "List of LOUD Mining Pools and their locations")
-        .addField("<network ($ticker)", "Network stats of Pool coins")
+        .addField("<network ticker", "Network stats of Pool coins")
         .addField("<software", "Software links per network")
         .addField("Powered by © LOUD Mining 2018-2020", loudfoot.footer);
         return message.channel.send(helpEmbed);
     }
     message.channel.bulkDelete(1);
-    bot.channels.get(config.configs.chID).send(`${message.author} Please command me here thanks!`);
+    bot.channels.cache.get(config.configs.chID).send(`${message.author} Please command me here thanks!`);
+    setTimeout(delMsg, 3000);
+    function delMsg() {
+        bot.channels.cache.get(config.configs.chID).bulkDelete(1);
+    }
     return;
 }
 module.exports.help = {

@@ -3,14 +3,13 @@
   "version": "1.2.0",
   "description": "LOUD Mining Discord Bot",
   "main": "loudbot.js",
-  "repo": "https://github.com/LOUD-Mining/LOUD-Bot",
+  "repository": "https://github.com/LOUD-Mining/LOUD-Bot",
   "author": "LOUD-Mining",
   "maintainer": "Nugetzrul3",
   "license": "ISC",
   "dependencies": {
     "discord.js": "^12.2.0",
-    "fs": "^0.0.1-security",
-    "node-fetch": "^2.6.0",
-    "uwebsockets": "^18.4.0"
+    "fs": "0.0.1-security",
+    "node-fetch": "^2.6.0"
   }
 }
