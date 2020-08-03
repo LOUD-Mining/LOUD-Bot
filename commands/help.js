@@ -1,24 +1,23 @@
-const loudFoot = require("./configs/footer.json");
 const Discord = require("discord.js");
+const loudfoot = require("../configs/footer.json");
+const config = require("../configs/config.json");
 module.exports.run = async (bot, message, args) => {
     let check = message.channel.id;
-    let correct = "537913904005775361";
     if(message.channel.type == "dm") return message.channel.send("Sorry can't do that here!");
-    if(check == correct) {
-        let helpEmbed = new Discord.RichEmbed()
+    if(check == config.configs.chID) {
+        let helpEmbed = new Discord.MessageEmbed()
         .setTitle("Available Commands")
         .setColor("#00720D")
-        .setThumbnail(URL = "https://loudmining.com/images/loudog.png")
-        .addField(".help", "This help message")
-        .addField(".pools", "LOUD Mining's Pool Stats")
-        .addField(".network", "Network stats of Pool coins")
-        .addField(".promo", "Current Promotions")
-        .addField(".software", "Software links per network")
-        .addField("Powered by © LOUD Mining 2018", (loudFoot.footer));
+        .setThumbnail(URL = "https://loudmining.com/media/lm-us.png")
+        .addField("<help", "This help message")
+        .addField("<pools", "List of LOUD Mining Pools and their locations")
+        .addField("<network ($ticker)", "Network stats of Pool coins")
+        .addField("<software", "Software links per network")
+        .addField("Powered by © LOUD Mining 2018-2020", loudfoot.footer);
         return message.channel.send(helpEmbed);
     }
     message.channel.bulkDelete(1);
-    bot.channels.get("537913904005775361").send(`${message.author} Please command me here or in a DM thanks!`);
+    bot.channels.get(config.configs.chID).send(`${message.author} Please command me here thanks!`);
     return;
 }
 module.exports.help = {

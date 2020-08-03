@@ -1,18 +1,16 @@
 {
   "name": "loud_bot",
-  "version": "1.0.0",
-  "description": "LOUD Mining Stats",
+  "version": "1.2.0",
+  "description": "LOUD Mining Discord Bot",
   "main": "loudbot.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "",
+  "repo": "https://github.com/LOUD-Mining/LOUD-Bot",
+  "author": "LOUD-Mining",
+  "maintainer": "Nugetzrul3",
   "license": "ISC",
   "dependencies": {
-    "discord.js": "^11.4.2",
-    "snekfetch": "^4.0.4",
-    "sqlite": "^3.0.0",
-    "superagent": "^4.0.0",
-    "uws": "^99.0.0"
+    "discord.js": "^12.2.0",
+    "fs": "^0.0.1-security",
+    "node-fetch": "^2.6.0",
+    "uWebSockets": "^18.4.0"
   }
 }
