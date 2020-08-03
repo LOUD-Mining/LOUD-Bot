@@ -70,7 +70,7 @@ module.exports.run = async (bot, message, args) => {
         var difficulty
         var hashrate
         if (check == config.configs.chID) {
-            if (args.toLowerCase() == "upx") {
+            if (args.toString().toLowerCase() == "upx") {
                 networkEmbed = new Discord.MessageEmbed()
                 api = "https://loudmining.com/upx/api/stats"
 
@@ -91,7 +91,7 @@ module.exports.run = async (bot, message, args) => {
                 return message.channel.send(networkEmbed)
 
             }
-            else if (args.toLowerCase() == "xmr") {
+            else if (args.toString().toLowerCase() == "xmr") {
                 networkEmbed = new Discord.MessageEmbed()
                 api = "https://loudmining.com/xmr/api/stats"
 
@@ -112,7 +112,7 @@ module.exports.run = async (bot, message, args) => {
                 return message.channel.send(networkEmbed)
                 
             }
-            else if (args.toLowerCase() == "vrsc") {
+            else if (args.toString().toLowerCase() == "vrsc") {
                 api = "https://loudmining.com/verus/api/stats"
                 networkEmbed = new Discord.MessageEmbed()
 
