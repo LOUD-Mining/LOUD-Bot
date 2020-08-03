@@ -5,10 +5,7 @@
   "main": "loudbot.js",
   "repo": "https://github.com/LOUD-Mining/LOUD-Bot",
   "author": "LOUD-Mining",
-  "maintainers": {
-    "Owner": "LOUD-Mining",
-    "Star Contributor": "Nugetzrul3"
-  },
+  "maintainer": "Nugetzrul3",
   "license": "ISC",
   "dependencies": {
     "discord.js": "^12.2.0",
