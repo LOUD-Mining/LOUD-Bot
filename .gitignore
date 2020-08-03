@@ -1,0 +1,4 @@
+.git
+.vscode
+/configs/config.json
+/configs/token.json
