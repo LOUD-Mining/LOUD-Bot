@@ -1,8 +1,5 @@
 .git
 .vscode
 /configs/config.json
-<<<<<<< HEAD
 /configs/token.json
-=======
-/configs/token.json
->>>>>>> c845924dc4ec93398e91b4b3298fb3ab6c75970b
+/node-modules/
