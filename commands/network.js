@@ -9,11 +9,10 @@ module.exports.run = async (bot, message, args) => {
     if (check == config.configs.chID) {
 
         let networkEmbed
-        let api
 
-        function getAPIStats(api) {
+        function getAPIStats(apicall) {
             return Promise.resolve($.ajax({
-                url: api,
+                url: apicall,
                 dataType: 'json',
                 type: 'GET' 
             }))
@@ -69,70 +68,67 @@ module.exports.run = async (bot, message, args) => {
         var height
         var difficulty
         var hashrate
-        if (check == config.configs.chID) {
-            if (args.toString().toLowerCase() == "upx") {
-                networkEmbed = new Discord.MessageEmbed()
-                api = "https://loudmining.com/upx/api/stats"
+        if (args.toString().toLowerCase() == "upx") {
+            networkEmbed = new Discord.MessageEmbed()
 
-                (async () => {
-                    getAPIStats(api).then(function(data) {
-                        height = data.network.height
-                        difficulty = convertDifficulty(data.network.difficulty)
-                        hashrate = convertHashes((difficulty / 120))
-                    })
+            (async () => {
+                getAPIStats(config.network.upx).then(function(data) {
+                    height = data.network.height
+                    difficulty = convertDifficulty(data.network.difficulty)
+                    hashrate = convertHashes((difficulty / 120))
                 })
+            })
 
-                .setTitle("UPX Network Stats")
-                .setColor("#00720D")
-                .addField("Current Block Height: " + height.toString())
-                .addField("Current Network Difficulty " + difficulty.toString())
-                .addField("Current Network Hashrate: " + hashrate.toString())
+            .setTitle("UPX Network Stats")
+            .setColor("#00720D")
+            .addField("Current Block Height: " + height.toString())
+            .addField("Current Network Difficulty " + difficulty.toString())
+            .addField("Current Network Hashrate: " + hashrate.toString())
 
-                return message.channel.send(networkEmbed)
+            return message.channel.send(networkEmbed)
 
-            }
-            else if (args.toString().toLowerCase() == "xmr") {
-                networkEmbed = new Discord.MessageEmbed()
-                api = "https://loudmining.com/xmr/api/stats"
+        }
+        else if (args.toString().toLowerCase() == "xmr") {
+            networkEmbed = new Discord.MessageEmbed()
+            var api = "https://loudmining.com/xmr/api/stats"
 
-                (async () => {
-                    getAPIStats(api).then(function(data) {
-                        height = data.network.height
-                        difficulty = convertDifficulty(data.network.difficulty)
-                        hashrate = convertHashes((difficulty / 120))
-                    })
+            (async () => {
+                getAPIStats(config.network.xmr).then(function(data) {
+                    height = data.network.height
+                    difficulty = convertDifficulty(data.network.difficulty)
+                    hashrate = convertHashes((difficulty / 120))
                 })
+            })
 
-                .setTitle("XMR Network Stats")
-                .setColor("#00720D")
-                .addField("Current Block Height: " + height.toString())
-                .addField("Current Network Difficulty " + difficulty.toString())
-                .addField("Current Network Hashrate: " + hashrate.toString())
+            .setTitle("XMR Network Stats")
+            .setColor("#00720D")
+            .addField("Current Block Height: " + height.toString())
+            .addField("Current Network Difficulty " + difficulty.toString())
+            .addField("Current Network Hashrate: " + hashrate.toString())
 
-                return message.channel.send(networkEmbed)
-                
-            }
-            else if (args.toString().toLowerCase() == "vrsc") {
-                api = "https://loudmining.com/verus/api/stats"
-                networkEmbed = new Discord.MessageEmbed()
+            return message.channel.send(networkEmbed)
+            
+        }
+        else if (args.toString().toLowerCase() == "vrsc") {
+            var api = "https://loudmining.com/verus/api/stats"
+            networkEmbed = new Discord.MessageEmbed()
 
-                (async () => {
-                    getAPIStats(api).then(function(data) {
-                        height = data.pools.verus.poolStats.networkBlocks
-                        difficulty = convertDifficulty(parseInt(data.pools.verus.poolStats.networkDiff))
-                        hashrate = convertHashes(parseInt(data.pools.verus.poolStats.networkSols))
-                    })
+            (async () => {
+                getAPIStats(config.network.vrsc).then(function(data) {
+                    height = data.pools.verus.poolStats.networkBlocks
+                    difficulty = convertDifficulty(parseInt(data.pools.verus.poolStats.networkDiff))
+                    hashrate = convertHashes(parseInt(data.pools.verus.poolStats.networkSols))
                 })
+            })
 
-                .setTitle("VRSC Network Stats")
-                .setColor("#00720D")
-                .addField("Current Block Height: " + height.toString())
-                .addField("Current Network Difficulty " + difficulty.toString())
-                .addField("Current Network Hashrate: " + hashrate.toString())
+            .setTitle("VRSC Network Stats")
+            .setColor("#00720D")
+            .addField("Current Block Height: " + height.toString())
+            .addField("Current Network Difficulty " + difficulty.toString())
+            .addField("Current Network Hashrate: " + hashrate.toString())
 
-                return message.channel.send(networkEmbed)
+            return message.channel.send(networkEmbed)
 
-            }
         }
     }
 
