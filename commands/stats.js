@@ -2,7 +2,7 @@ const Discord = require("discord.js");
 const fetch = require("node-fetch");
 const config = require("../configs/config.json");
 const pools = require("../configs/pools.json");
-module.exports.run = async (bot, message, location, coin) => {
+module.exports.run = async (bot, message, args) => {
     var check = message.channel.id;
     if (message.channel.type == "dm") return message.channel.send("Sorry can't do that here!");
     if (check == config.configs.chID) {
@@ -70,33 +70,46 @@ module.exports.run = async (bot, message, location, coin) => {
         }
 
         // USA Stats
-        if (location.toString() == "usa"){
-            if (coin.toString() == "xmr") {
+        if (`${args[0]}`.toLowerCase() == "usa"){
+            if (`${args[1]}`.toLowerCase() == "xmr") {
                 var api = pools.coin.xmr.apiUrl
-                return message.channel.send(displayCN(api))
+                var donation = `497eMhzAuwyLj6Mct54GETCHyrmYkXVGKXxhZDfgsLJ2D7XPobiAMGZhsTrFyuxcYPJvMvdQbekWQS3DXLSuy3Y18YLcsAQ`
+                displayCN(api, donation)
             }
-            else if (coin.toString() == "upx") {
+            else if (`${args[1]}`.toLowerCase() == "upx") {
                 var api = pools.coin.upx.apiUrl
-                return message.channel.send(displayCN(api))
+                var donation = `UPX1brGoBKBMpKuqyPSJE9424fpP4HYNy6V9XTZnTdVk36HjzcRmpJT7wbyN3CRLrJB8TTQK2wWf5XGQLkKAXCon5HiDNMRA1q`
+                displayCN(api, donation)
             }
-            else if (coin.toString()== "vrsc") {
+            else if (`${args[1]}`.toLowerCase() == "vrsc") {
                 var api = pools.coin.vrsc.apiUrl
                 displayKMD(api)
             }
+            else {
+                message.channel.send("Please enter a valid network (available USA networks: xmr, upx, vrsc)")
+            }
         }
         // BE Stats
-        else if (location.toString() == "be") {
-            if (coin.toString() == "xmr") {
+        else if(`${args[0]}`.toLowerCase() == "be") {
+            if (`${args[1]}`.toLowerCase() == "xmr") {
                 var api = pools.coin.xmr.apiUrlBE
-                return message.channel.send(displayCN(api))
+                var donation = `497eMhzAuwyLj6Mct54GETCHyrmYkXVGKXxhZDfgsLJ2D7XPobiAMGZhsTrFyuxcYPJvMvdQbekWQS3DXLSuy3Y18YLcsAQ`
+                displayCN(api, donation)
             }
-            else if (coin.toString() == "upx") {
+            else if (`${args[1]}`.toLowerCase() == "upx") {
                 var api = pools.coin.upx.apiUrlBE
-                return message.channel.send(displayCN(api))
+                var donation = `UPX1brGoBKBMpKuqyPSJE9424fpP4HYNy6V9XTZnTdVk36HjzcRmpJT7wbyN3CRLrJB8TTQK2wWf5XGQLkKAXCon5HiDNMRA1q`
+                displayCN(api, donation)
+            }
+            else {
+                message.channel.send("Please enter a valid network (available BE networks: xmr, upx)")
             }
         }
+        else {
+            return message.channel.send("Please enter a valid location (locations available: usa, be)")
+        }
 
-        function displayCN(apicall) {
+        function displayCN(apicall, donationaddress) {
             fetch(apicall)
             .then(result => result.json())
             .then(data => {
@@ -113,21 +126,21 @@ module.exports.run = async (bot, message, location, coin) => {
                     "hash": data.lastblock.hash
                 }
                 var poolconfig = {
-                    "fee": data.config.fee,
-                    "interval": (data.config.paymentsInterval).toFixed(1)
+                    "fee": parseFloat(data.config.fee + data.config.donation[donationaddress]).toFixed(1),
+                    "interval": (data.config.paymentsInterval / 60).toFixed(1)
                 }
 
                 let CNStatsEmbed  = new Discord.MessageEmbed()
-                .setTitle(location.toUpperCase() + " " + coin.toUpperCase() + " Pool Statistics")
+                .setTitle(args[0].toUpperCase() + " " + args[1].toUpperCase() + " Pool Statistics")
                 .setColor("#00720D")
-                .addField("Pool hashrate (PROP/SOLO): ", prophash.toString() + "/" + solohash.toString())
-                .addField("Pool Miners (PROP/SOLO): ", propminers.toString() + "/" + solominers.toString())
-                .addField("Pool Workers (PROP/SOLO): ", propworkers.toString() + "/" + soloworkers.toString())
-                .addField("Total Blocks Found (PROP/SOLO): ", proptotal.toString() + "/" + solototal.toString())
+                .addField("Pool hashrate (PROP/SOLO): ", convertHashes(prophash) + " **/** " + convertHashes(solohash))
+                .addField("Pool Miners (PROP/SOLO): ", propminers.toString() + "**/**" + solominers.toString())
+                .addField("Pool Workers (PROP/SOLO): ", propworkers.toString() + "**/**" + soloworkers.toString())
+                .addField("Total Blocks Found (PROP/SOLO): ", proptotal.toString() + "**/**" + solototal.toString())
                 .addField("Last Found Block:", "Block Hash:\n" + lastfound["hash"] + "\n" + "Time found:\n" + lastfound["date"])
-                .addField("Pool Configuration:", "Payment Interval: " + poolconfig["interval"] + "Minutes\n Fee: " + poolconfig["fee"])
+                .addField("Pool Configuration:", "Payment Interval: " + poolconfig["interval"] + "Minutes\n Fee: " + poolconfig["fee"] + "%")
 
-                return CNStatsEmbed
+                return message.channel.send(CNStatsEmbed)
             })
         }
 
@@ -137,7 +150,7 @@ module.exports.run = async (bot, message, location, coin) => {
                 result => result.json()
             )
             .then(data => {
-
+                
             })
         }
     }
