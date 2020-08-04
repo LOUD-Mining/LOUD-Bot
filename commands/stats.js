@@ -2,7 +2,7 @@ const Discord = require("discord.js");
 const fetch = require("node-fetch");
 const config = require("../configs/config.json");
 const pools = require("../configs/pools.json");
-module.exports.run = async (bot, message, location, coin) => {
+module.exports.run = async (bot, message, args) => {
     var check = message.channel.id;
     if (message.channel.type == "dm") return message.channel.send("Sorry can't do that here!");
     if (check == config.configs.chID) {
@@ -70,16 +70,16 @@ module.exports.run = async (bot, message, location, coin) => {
         }
 
         // USA Stats
-        if (location.toString() == "usa"){
-            if (coin.toString() == "xmr") {
+        if (args[0] == "usa"){
+            if (args[1] == "xmr") {
                 var api = pools.coin.xmr.apiUrl
-                return message.channel.send(displayCN(api))
+                return message.channel.send("Test1")
             }
-            else if (coin.toString() == "upx") {
+            else if (args[1] == "upx") {
                 var api = pools.coin.upx.apiUrl
                 return message.channel.send(displayCN(api))
             }
-            else if (coin.toString()== "vrsc") {
+            else if (args[1] == "vrsc") {
                 var api = pools.coin.vrsc.apiUrl
                 displayKMD(api)
             }
@@ -96,7 +96,7 @@ module.exports.run = async (bot, message, location, coin) => {
             }
         }
 
-        function displayCN(apicall) {
+        /*function displayCN(apicall) {
             fetch(apicall)
             .then(result => result.json())
             .then(data => {
@@ -129,7 +129,7 @@ module.exports.run = async (bot, message, location, coin) => {
 
                 return CNStatsEmbed
             })
-        }
+        }*/
 
         function displayKMD(apicall) {
             fetch(apicall)
