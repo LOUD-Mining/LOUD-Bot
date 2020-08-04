@@ -73,11 +73,13 @@ module.exports.run = async (bot, message, args) => {
         if (args[0] == "usa"){
             if (args[1] == "xmr") {
                 var api = pools.coin.xmr.apiUrl
-                return message.channel.send("Test1")
+                var donation = `497eMhzAuwyLj6Mct54GETCHyrmYkXVGKXxhZDfgsLJ2D7XPobiAMGZhsTrFyuxcYPJvMvdQbekWQS3DXLSuy3Y18YLcsAQ`
+                displayCN(api, donation)
             }
             else if (args[1] == "upx") {
                 var api = pools.coin.upx.apiUrl
-                return message.channel.send(displayCN(api))
+                var donation = `UPX1brGoBKBMpKuqyPSJE9424fpP4HYNy6V9XTZnTdVk36HjzcRmpJT7wbyN3CRLrJB8TTQK2wWf5XGQLkKAXCon5HiDNMRA1q`
+                displayCN(api, donation)
             }
             else if (args[1] == "vrsc") {
                 var api = pools.coin.vrsc.apiUrl
@@ -85,18 +87,20 @@ module.exports.run = async (bot, message, args) => {
             }
         }
         // BE Stats
-        else if (location.toString() == "be") {
-            if (coin.toString() == "xmr") {
+        else if (args[0] == "be") {
+            if (args[1] == "xmr") {
                 var api = pools.coin.xmr.apiUrlBE
-                return message.channel.send(displayCN(api))
+                var donation = `497eMhzAuwyLj6Mct54GETCHyrmYkXVGKXxhZDfgsLJ2D7XPobiAMGZhsTrFyuxcYPJvMvdQbekWQS3DXLSuy3Y18YLcsAQ`
+                displayCN(api, donation)
             }
-            else if (coin.toString() == "upx") {
+            else if (args[1] == "upx") {
                 var api = pools.coin.upx.apiUrlBE
-                return message.channel.send(displayCN(api))
+                var donation = `UPX1brGoBKBMpKuqyPSJE9424fpP4HYNy6V9XTZnTdVk36HjzcRmpJT7wbyN3CRLrJB8TTQK2wWf5XGQLkKAXCon5HiDNMRA1q`
+                displayCN(api, donation)
             }
         }
 
-        /*function displayCN(apicall) {
+        function displayCN(apicall, donationaddress) {
             fetch(apicall)
             .then(result => result.json())
             .then(data => {
@@ -113,23 +117,23 @@ module.exports.run = async (bot, message, args) => {
                     "hash": data.lastblock.hash
                 }
                 var poolconfig = {
-                    "fee": data.config.fee,
-                    "interval": (data.config.paymentsInterval).toFixed(1)
+                    "fee": parseFloat(data.config.fee + data.config.donation[donationaddress]).toFixed(1),
+                    "interval": (data.config.paymentsInterval / 60).toFixed(1)
                 }
 
                 let CNStatsEmbed  = new Discord.MessageEmbed()
-                .setTitle(location.toUpperCase() + " " + coin.toUpperCase() + " Pool Statistics")
+                .setTitle(args[0].toUpperCase() + " " + args[1].toUpperCase() + " Pool Statistics")
                 .setColor("#00720D")
-                .addField("Pool hashrate (PROP/SOLO): ", prophash.toString() + "/" + solohash.toString())
-                .addField("Pool Miners (PROP/SOLO): ", propminers.toString() + "/" + solominers.toString())
-                .addField("Pool Workers (PROP/SOLO): ", propworkers.toString() + "/" + soloworkers.toString())
-                .addField("Total Blocks Found (PROP/SOLO): ", proptotal.toString() + "/" + solototal.toString())
+                .addField("Pool hashrate (PROP/SOLO): ", convertHashes(prophash) + " **/** " + convertHashes(solohash))
+                .addField("Pool Miners (PROP/SOLO): ", propminers.toString() + "**/**" + solominers.toString())
+                .addField("Pool Workers (PROP/SOLO): ", propworkers.toString() + "**/**" + soloworkers.toString())
+                .addField("Total Blocks Found (PROP/SOLO): ", proptotal.toString() + "**/**" + solototal.toString())
                 .addField("Last Found Block:", "Block Hash:\n" + lastfound["hash"] + "\n" + "Time found:\n" + lastfound["date"])
-                .addField("Pool Configuration:", "Payment Interval: " + poolconfig["interval"] + "Minutes\n Fee: " + poolconfig["fee"])
+                .addField("Pool Configuration:", "Payment Interval: " + poolconfig["interval"] + "Minutes\n Fee: " + poolconfig["fee"] + "%")
 
-                return CNStatsEmbed
+                return message.channel.send(CNStatsEmbed)
             })
-        }*/
+        }
 
         function displayKMD(apicall) {
             fetch(apicall)
@@ -137,7 +141,7 @@ module.exports.run = async (bot, message, args) => {
                 result => result.json()
             )
             .then(data => {
-
+                
             })
         }
     }
