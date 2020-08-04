@@ -7,6 +7,7 @@
   "coin": {
     "xmr": {
       "apiUrl": "https://loudmining.com/xmr/api/stats",
+      "apiUrlBE": "https://be.loudmining.com/xmr/api/stats",
       "siteUrl": "https://loudmining.com/xmr",
       "ports": {
         "2100": "IOT, Low-End and Older Hardware",
@@ -17,6 +18,7 @@
     },
     "upx": {
       "apiUrl":"https://loudmining.com/upx/api/stats",
+      "apiUrlBE": "https://be.loudmining.com/upx/api/stats",
       "siteUrl": "https://loudmining.com/upx",
       "ports": {
         "2000": "IOT, Low-End and Older Hardware",
@@ -27,6 +29,7 @@
     },
     "vrsc": {
       "apiUrl":"https://loudmining.com/verus/api/stats",
+      "apiUrlBE": "https://be.loudmining.com/verus/api/stats",
       "siteUrl": "https://loudmining.com/verus",
       "ports": {
         "2300": "IOT, Low-End and Older Hardware, Low-Midrange GPU-Rigs",
