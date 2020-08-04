@@ -1,0 +1,37 @@
+{
+  "stratum": {
+    "USA": "loudmining.com",
+    "BE": "be.loudmining.com",
+    "HK": "hk.loudmining.com"
+  },
+  "coin": {
+    "xmr": {
+      "apiUrl": "https://loudmining.com/xmr/api/stats",
+      "siteUrl": "https://loudmining.com/xmr",
+      "ports": {
+        "2100": "IOT, Low-End and Older Hardware",
+        "2101": "High-End IOT, Mid-Range Hardware, Low-End GPU-Rigs",
+        "2102": "High-End Hardware, Entry-Level Servers, Mid-Range GPU-Rigs",
+        "2103": "Cloud-Mining, Enterprise Servers, High-End GPU-Rigs"
+      }
+    },
+    "upx": {
+      "apiUrl":"https://loudmining.com/upx/api/stats",
+      "siteUrl": "https://loudmining.com/upx",
+      "ports": {
+        "2000": "IOT, Low-End and Older Hardware",
+        "2001": "High-End IOT, Mid-Range Hardware, Low-End GPU-Rigs",
+        "2002": "High-End Hardware, Entry-Level Servers, Mid-Range GPU-Rigs",
+        "2003": "Cloud-Mining, Enterprise Servers, High-End GPU-Rigs"
+      }
+    },
+    "vrsc": {
+      "apiUrl":"https://loudmining.com/verus/api/stats",
+      "siteUrl": "https://loudmining.com/verus",
+      "ports": {
+        "2300": "IOT, Low-End and Older Hardware, Low-Midrange GPU-Rigs",
+        "2301": "High-End IOT, High-End Hardware, High-End GPU-Rigs, FPGA"
+      }
+    }
+  }
+}

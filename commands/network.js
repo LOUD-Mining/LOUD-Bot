@@ -1,6 +1,7 @@
 const Discord = require("discord.js");
 const fetch = require("node-fetch");
 const config = require("../configs/config.json");
+const pools = require("../configs/pools.json");
 var height;
 var difficulty;
 var hashrate;
@@ -55,7 +56,7 @@ module.exports.run = async (bot, message, args) => {
       }
   }
   if (args.toString().toLowerCase() == "upx") {
-    apiUrl = config.network.upx;
+    apiUrl = pools.coin.upx.apiUrl;
     blkTime = 120;
     fetch(apiUrl)
     .then(result => result.json())
@@ -72,7 +73,7 @@ module.exports.run = async (bot, message, args) => {
       return message.channel.send(networkEmbed);
   });return}
   else if (args.toString().toLowerCase() == "xmr") {
-    apiUrl = config.network.xmr;
+    apiUrl = pools.coin.xmr.apiUrl;
     blkTime = 120;
     fetch(apiUrl)
     .then(result => result.json())
@@ -89,7 +90,7 @@ module.exports.run = async (bot, message, args) => {
       return message.channel.send(networkEmbed);
   });return}
   else if (args.toString().toLowerCase() == "vrsc") {
-    apiUrl = config.network.vrsc;
+    apiUrl = pools.coin.vrsc.apiUrl;
     fetch(apiUrl)
     .then(result => result.json())
     .then(data => {
