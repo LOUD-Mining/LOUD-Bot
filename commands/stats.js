@@ -70,34 +70,43 @@ module.exports.run = async (bot, message, args) => {
         }
 
         // USA Stats
-        if (args[0] == "usa"){
-            if (args[1] == "xmr") {
+        if (`${args[0]}`.toLowerCase() == "usa"){
+            if (`${args[1]}`.toLowerCase() == "xmr") {
                 var api = pools.coin.xmr.apiUrl
                 var donation = `497eMhzAuwyLj6Mct54GETCHyrmYkXVGKXxhZDfgsLJ2D7XPobiAMGZhsTrFyuxcYPJvMvdQbekWQS3DXLSuy3Y18YLcsAQ`
                 displayCN(api, donation)
             }
-            else if (args[1] == "upx") {
+            else if (`${args[1]}`.toLowerCase() == "upx") {
                 var api = pools.coin.upx.apiUrl
                 var donation = `UPX1brGoBKBMpKuqyPSJE9424fpP4HYNy6V9XTZnTdVk36HjzcRmpJT7wbyN3CRLrJB8TTQK2wWf5XGQLkKAXCon5HiDNMRA1q`
                 displayCN(api, donation)
             }
-            else if (args[1] == "vrsc") {
+            else if (`${args[1]}`.toLowerCase() == "vrsc") {
                 var api = pools.coin.vrsc.apiUrl
                 displayKMD(api)
             }
+            else {
+                message.channel.send("Please enter a valid network (available USA networks: xmr, upx, vrsc)")
+            }
         }
         // BE Stats
-        else if (args[0] == "be") {
-            if (args[1] == "xmr") {
+        else if(`${args[0]}`.toLowerCase() == "be") {
+            if (`${args[1]}`.toLowerCase() == "xmr") {
                 var api = pools.coin.xmr.apiUrlBE
                 var donation = `497eMhzAuwyLj6Mct54GETCHyrmYkXVGKXxhZDfgsLJ2D7XPobiAMGZhsTrFyuxcYPJvMvdQbekWQS3DXLSuy3Y18YLcsAQ`
                 displayCN(api, donation)
             }
-            else if (args[1] == "upx") {
+            else if (`${args[1]}`.toLowerCase() == "upx") {
                 var api = pools.coin.upx.apiUrlBE
                 var donation = `UPX1brGoBKBMpKuqyPSJE9424fpP4HYNy6V9XTZnTdVk36HjzcRmpJT7wbyN3CRLrJB8TTQK2wWf5XGQLkKAXCon5HiDNMRA1q`
                 displayCN(api, donation)
             }
+            else {
+                message.channel.send("Please enter a valid network (available BE networks: xmr, upx)")
+            }
+        }
+        else {
+            return message.channel.send("Please enter a valid location (locations available: usa, be)")
         }
 
         function displayCN(apicall, donationaddress) {
