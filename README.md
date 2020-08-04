@@ -1,15 +1,16 @@
-####Please note this page is currently under construction please keep checking back as this readme will be finished soon!
+#### Please note this page is currently under construction please keep checking back as this readme will be finished soon!
 
 #### LOUD-Bot
 Development of the LOUD Mining Discord Bot
 
-###Install instructions:
+### Install instructions:
 
-###Requirements:
+### Requirements:
 
-  *NodeJS 14.7.0 or later --- Seriously, this app was built using this version, it may or may not work "out of the box" on earlier versions.
+  * NodeJS 14.7.0 or later --- Seriously, this app was built using this version, it may or may not work "out of the box" on earlier versions.
+    * use [NVM](https://github.com/nvm-sh/nvm/) to install NodeJS the easy way!
   
-  *MySQL 8.0.21 or later  --- Only necessary if storing any kind of data long term.
+  * MySQL 8.0.21 or later  --- Only necessary if storing any kind of data long term.
 
 
 
