@@ -1,5 +1,5 @@
 const config = require("./configs/config.json")
-const tokenFile = require("./configs/token.json")
+const token = require("./configs/token.json")
 const Discord = require("discord.js")
 const fs = require("fs")
 const bot = new Discord.Client()
