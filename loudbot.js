@@ -4,7 +4,7 @@ const Discord = require("discord.js");
 const fs = require("fs");
 const bot = new Discord.Client();
 
-function catchErr(err, message) {
+function catchErr(err) {
 	bot.users.get(config.configs.adminUser).send(config.configs.errMsg);
 	bot.users.get(config.configs.adminUser).send("Error contained below: \n```" + err + "```");
 }
@@ -47,5 +47,5 @@ bot.on("message", async message => {
 bot.login(tokenFile.token);
 }
 catch{
-	catchErr(err, message);
+	catchErr(err);
 }
