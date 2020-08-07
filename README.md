@@ -11,7 +11,7 @@
   * NodeJS 14.7.0 or later --- Seriously, this app was built using this version, it may or may not work "out of the box" on earlier versions.
     * use [NVM](https://github.com/nvm-sh/nvm/) to install and manage NodeJS the easy way!
   
-  * MySQL 8.0.21 or later  --- Optional --- (Only necessary if storing any kind of data long term.)
+  * MySQL 8.0.21 or later  --- This is necessary to make the mystats command work as we need to store user data and fetch it later.
 
 
 ### Install Instructions:
