@@ -13,12 +13,14 @@ module.exports.run = async (bot, message, args) => {
             if (`${args[1]}`.toLowerCase() == "xmr") {
                 var api = pools.coin.xmr.apiUrl
                 var donation = `497eMhzAuwyLj6Mct54GETCHyrmYkXVGKXxhZDfgsLJ2D7XPobiAMGZhsTrFyuxcYPJvMvdQbekWQS3DXLSuy3Y18YLcsAQ`
-                displayCN(api, donation)
+                var locImg = "lm-us.png"
+                displayCN(api, donation, locImg)
             }
             else if (`${args[1]}`.toLowerCase() == "upx") {
                 var api = pools.coin.upx.apiUrl
                 var donation = `UPX1brGoBKBMpKuqyPSJE9424fpP4HYNy6V9XTZnTdVk36HjzcRmpJT7wbyN3CRLrJB8TTQK2wWf5XGQLkKAXCon5HiDNMRA1q`
-                displayCN(api, donation)
+                var locImg = "lm-us.png"
+                displayCN(api, donation, locImg)
             }
             else if (`${args[1]}`.toLowerCase() == "vrsc") {
                 var api = pools.coin.vrsc.apiUrl
@@ -34,12 +36,14 @@ module.exports.run = async (bot, message, args) => {
             if (`${args[1]}`.toLowerCase() == "xmr") {
                 var api = pools.coin.xmr.apiUrlBE
                 var donation = `497eMhzAuwyLj6Mct54GETCHyrmYkXVGKXxhZDfgsLJ2D7XPobiAMGZhsTrFyuxcYPJvMvdQbekWQS3DXLSuy3Y18YLcsAQ`
-                displayCN(api, donation)
+                var locImg = "lm-be.png"
+                displayCN(api, donation, locImg)
             }
             else if (`${args[1]}`.toLowerCase() == "upx") {
                 var api = pools.coin.upx.apiUrlBE
                 var donation = `UPX1brGoBKBMpKuqyPSJE9424fpP4HYNy6V9XTZnTdVk36HjzcRmpJT7wbyN3CRLrJB8TTQK2wWf5XGQLkKAXCon5HiDNMRA1q`
-                displayCN(api, donation)
+                var locImg = "lm-be.png"
+                displayCN(api, donation, locImg)
             }
             else {
                 message.channel.send(":interrobang: Please enter a valid network :interrobang: (available BE networks: xmr, upx)")
@@ -72,6 +76,7 @@ module.exports.run = async (bot, message, args) => {
 
                 let CNStatsEmbed  = new Discord.MessageEmbed()
                 .setTitle(args[0].toUpperCase() + " " + args[1].toUpperCase() + " Pool Statistics")
+                .setThumbnail(URL = `https://loudmining.com/media/${locImg}`)
                 .setColor("#00720D")
                 .addField("Pool hashrate (PROP/SOLO): ", functions.convertHashes(prophash) + " **/** " + functions.convertHashes(solohash))
                 .addField("Pool Miners (PROP/SOLO): ", propminers.toString() + "**/**" + solominers.toString())

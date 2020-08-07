@@ -2,18 +2,21 @@
 
 # LOUD-Bot
  * Development of the LOUD Mining Discord Bot
- * Original Author: [LOUD-Mining](https://github.com/LOUD-Mining/)
- * :star: Contributor: [Nugetzrul3](https://github.com/Nugetzrul3/)
+ * **Original Author**: [LOUD-Mining](https://github.com/LOUD-Mining/)
+ * :star: **Contributor**: [Nugetzrul3](https://github.com/Nugetzrul3/)
 
-## Install instructions:
 
-### Requirements:
+### Dependencies:
 
   * NodeJS 14.7.0 or later --- Seriously, this app was built using this version, it may or may not work "out of the box" on earlier versions.
-    * use [NVM](https://github.com/nvm-sh/nvm/) to install NodeJS the easy way!
+    * use [NVM](https://github.com/nvm-sh/nvm/) to install and manage NodeJS the easy way!
   
-  * MySQL 8.0.21 or later  --- Only necessary if storing any kind of data long term.
+  * MySQL 8.0.21 or later  --- Optional --- (Only necessary if storing any kind of data long term.)
 
+
+### Install Instructions:
+
+  ```# adduser --disabled-password botusername```
 
 
 
