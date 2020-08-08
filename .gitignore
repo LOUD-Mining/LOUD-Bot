@@ -1,5 +1,4 @@
 .git
 .vscode
-/configs/config.json
-/configs/token.json
-/node_modules/
+configs/
+node_modules/
