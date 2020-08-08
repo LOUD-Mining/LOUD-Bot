@@ -10,16 +10,15 @@ module.exports.run = async (bot, message, args) => {
 
         // USA Stats
         if (`${args[0]}`.toLowerCase() == "usa"){
+            var locImg = "lm-us.png"
             if (`${args[1]}`.toLowerCase() == "xmr") {
                 var api = pools.coin.xmr.apiUrl
                 var donation = `497eMhzAuwyLj6Mct54GETCHyrmYkXVGKXxhZDfgsLJ2D7XPobiAMGZhsTrFyuxcYPJvMvdQbekWQS3DXLSuy3Y18YLcsAQ`
-                var locImg = "lm-us.png"
                 displayCN(api, donation, locImg)
             }
             else if (`${args[1]}`.toLowerCase() == "upx") {
                 var api = pools.coin.upx.apiUrl
                 var donation = `UPX1brGoBKBMpKuqyPSJE9424fpP4HYNy6V9XTZnTdVk36HjzcRmpJT7wbyN3CRLrJB8TTQK2wWf5XGQLkKAXCon5HiDNMRA1q`
-                var locImg = "lm-us.png"
                 displayCN(api, donation, locImg)
             }
             else if (`${args[1]}`.toLowerCase() == "vrsc") {
@@ -33,16 +32,15 @@ module.exports.run = async (bot, message, args) => {
         
         // BE Stats
         else if(`${args[0]}`.toLowerCase() == "be") {
+            var locImg = "lm-be.png"
             if (`${args[1]}`.toLowerCase() == "xmr") {
                 var api = pools.coin.xmr.apiUrlBE
                 var donation = `497eMhzAuwyLj6Mct54GETCHyrmYkXVGKXxhZDfgsLJ2D7XPobiAMGZhsTrFyuxcYPJvMvdQbekWQS3DXLSuy3Y18YLcsAQ`
-                var locImg = "lm-be.png"
                 displayCN(api, donation, locImg)
             }
             else if (`${args[1]}`.toLowerCase() == "upx") {
                 var api = pools.coin.upx.apiUrlBE
                 var donation = `UPX1brGoBKBMpKuqyPSJE9424fpP4HYNy6V9XTZnTdVk36HjzcRmpJT7wbyN3CRLrJB8TTQK2wWf5XGQLkKAXCon5HiDNMRA1q`
-                var locImg = "lm-be.png"
                 displayCN(api, donation, locImg)
             }
             else {
