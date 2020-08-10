@@ -51,15 +51,57 @@ module.exports = {
 
   // Thanks to this guy: https://stackoverflow.com/a/6078873
   timeConverter: function (timestamp){
-    var a = new Date(timestamp * 1000);
-    var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-    var year = a.getFullYear();
-    var month = months[a.getMonth()];
-    var date = a.getDate();
-    var hour = a.getHours();
-    var min = a.getMinutes();
-    var sec = a.getSeconds();
-    var time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec ;
-    return time;
-  }
+    var a = new Date(timestamp * 1000)
+    var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
+    var year = a.getFullYear()
+    var month = months[a.getMonth()]
+    var date = a.getDate()
+    var hour = a.getHours()
+    var min = a.getMinutes()
+    var sec = a.getSeconds()
+    var time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec 
+    return time
+	},
+	//check to see if wallet exists in database
+	walletCheck: function (network, walletAddress) {
+		const mysql = require("mysql"),
+			token = require('./configs/token.json'),
+			sql = mysql.createConnection(token.mySql)
+		sql.createQuery('select * from mystats where ' + network + 'wallet = ' + walletAddress, (err, walletdata) => {
+			if (network == "upx") {
+				walletNet = walletdata[0].upxwallet
+			} else if (network == "xmr"){
+				walletNet = walletdata[0].xmrwallet
+			} else if (network == "vrsc") {
+				walletNet = walletdata[0].vrscwallet
+			}
+			if (walletNet < 1) {
+				status = 1
+				wallet = null
+				return(status, wallet)
+			}
+			if (walletNet == walletAddress) {
+				status = 2
+				wallet = walletNet
+				return(status, wallet)
+			}
+			if (walletNet > 0 && walletNet !== walletAddress) {
+				status = 3
+				wallet = walletNet
+				return(status, wallet)
+			}
+		})
+	},
+	addWallet: function (network, walletAddress, memberID) {
+		if (network == "upx") {
+			walletNet =="upxwallet"
+		} else if (network == "xmr") {
+			walletNet == "xmrwallet"
+		} else if (network == "vrsc") {
+			walletNet == "vrscwallet"
+		}
+    sql.createQuery('insert into mystats (discord_userid, ' + walletNet + ') values (' + memberID + ', ' + walletAddress + ')' (err, walletdata) => {
+			`${walletdata[0]}.walletNet` = 
+		})
+	}
 }
