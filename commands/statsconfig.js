@@ -18,7 +18,15 @@ module.exports.run = async (bot, message, args) => {
 
   //check looks good, let's do this!
   if(check == config.configs.chID) {
-    
+    //function to check if mining on pool
+    functions.minerCheck(network, walletAddress)
+    if (status = false) {
+      nominerEmbed = new Discord.MessageEmbed()
+      .setTitle(":thinking: Are you mining to the pool?\nI cannot find your stats, so therefore I cannot register your address. :frowning:")
+      .setColor("#00720D")
+      return message.channel.send(nominerEmbed)
+    }
+
     //make a query to the database to check if wallet address exists
     functions.walletCheck(network, walletAddress)
 
@@ -26,7 +34,7 @@ module.exports.run = async (bot, message, args) => {
     if (status = 1) {
       //address does not exist, add wallet address to database
       functions.addWallet(network, walletAddress, memberID)
-      if (status = true) {
+      if (status = true && newuser == true) {
         //send message to user letting them know registration successful
         successEmbed = new Discord.MessageEmbed()
         .setTitle("Thank you for registering your " + network + "wallet address!\n" + wallet + "\nYou may now use the mystats command!")

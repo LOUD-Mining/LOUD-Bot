@@ -78,30 +78,34 @@ module.exports = {
 			if (walletNet < 1) {
 				status = 1
 				wallet = null
-				return(status, wallet)
+				return(err, status, wallet)
 			}
 			if (walletNet == walletAddress) {
 				status = 2
 				wallet = walletNet
-				return(status, wallet)
+				return(err, status, wallet)
 			}
 			if (walletNet > 0 && walletNet !== walletAddress) {
 				status = 3
 				wallet = walletNet
-				return(status, wallet)
+				return(err, status, wallet)
 			}
 		})
 	},
 	addWallet: function (network, walletAddress, memberID) {
+    var walletNet
 		if (network == "upx") {
-			walletNet =="upxwallet"
+			walletNet ="upxwallet"
 		} else if (network == "xmr") {
-			walletNet == "xmrwallet"
+			walletNet = "xmrwallet"
 		} else if (network == "vrsc") {
-			walletNet == "vrscwallet"
-		}
-    sql.createQuery('insert into mystats (discord_userid, ' + walletNet + ') values (' + memberID + ', ' + walletAddress + ')' (err, walletdata) => {
-			`${walletdata[0]}.walletNet` = 
-		})
+			walletNet = "vrscwallet"
+        }
+    sql.createQuery('select * from mystats where discord_userid = ' + memberID, (err, walletdata) => {
+      if (walletdata[0] < 1) return(newuser = true)
+      else newuser = false
+    })
+    sql.createQuery('insert into mystats (discord_userid, ' + walletNet + ') values (' + memberID + ', ' + walletAddress + ')')
+    return(err, newuser)
 	}
 }
