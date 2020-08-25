@@ -107,5 +107,39 @@ module.exports = {
     })
     sql.createQuery('insert into mystats (discord_userid, ' + walletNet + ') values (' + memberID + ', ' + walletAddress + ')')
     return(err, newuser)
-	}
+  },
+  nameitalready: function (network, walletAddress) {
+
+  },
+  fetchMinerStats: function (network, walletAddress) {
+    const fetch = require("node-fetch"),
+      pools = require("./configs/pools.json")
+      
+    var poolType
+    if (network == "upx" || network == "xmr") poolType = "cn"
+    else poolType = "sn"
+    if (poolType == "cn") {
+      var data
+      var statsUS
+      var statsBE
+      apiUrl = pools.api.cn.walletStats
+      apiCall = ("/" + network + apiUrl)
+      apiUS = (pools.stratum.USA + apiCall)
+      apiBE = (pools.stratum.BE + apiCall)
+      fetch(apiUS)
+      .then(result => result.json())
+      .then(data => {
+        if (data.error) return data.error
+        
+      })
+      fetch(apiBE)
+      .then(result => result.json())
+      .then(data => {
+        if (data.error) return 
+      })
+    
+    } else {
+
+    }
+  }
 }

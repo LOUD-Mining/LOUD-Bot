@@ -1,8 +1,9 @@
-const config = require("./configs/config.json")
-const token = require("./configs/token.json")
-const Discord = require("discord.js")
-const fs = require("fs")
-const bot = new Discord.Client()
+const config = require("./configs/config.json"),
+ token = require("./configs/token.json"),
+ Discord = require("discord.js"),
+ fs = require("fs"),
+ bot = new Discord.Client(),
+ channelID = config.configs.chID
 
 // create a new Discord Collection for the list of command files
 bot.commands = new Discord.Collection()
@@ -29,7 +30,7 @@ fs.readdir("./commands/", (err, files) => {
 try {
 bot.on("ready", function() {
 	console.log(`Awww Shit! Here come's that asshole ${bot.user.tag}`)
-	bot.user.setActivity("with people's emotions")
+  bot.user.setActivity("with people's emotions")
 });
 }
 catch {
@@ -39,7 +40,7 @@ catch {
 // bot looks at messages in server and determines if it is a command or not and then runs said command
 try {
 bot.on("message", async message => {
-	
+	message.channel.startTyping()
 	if(message.author.bot) return
 	if(message.author.bot.channelType == "dm") return
 	
@@ -49,7 +50,8 @@ bot.on("message", async message => {
 	args = messageArray.slice(1)
 	
 	commandfile = bot.commands.get(cmd.slice(prefix.length))
-	if(commandfile) commandfile.run(bot,message,args)
+  if(commandfile) commandfile.run(bot,message,args)
+  message.channel.stopTyping()
 })
 
 // logs the bot into discord, make sure to edit the token.json with your own discord oauth token!

@@ -1,28 +1,32 @@
-const Discord = require("discord.js");
-const functions = require("../functions.js")
-const fetch = require("node-fetch");
-const config = require("../configs/config.json");
-const pools = require("../configs/pools.json");
+const Discord = require("discord.js"),
+ functions = require("../functions.js"),
+ fetch = require("node-fetch"),
+ config = require("../configs/config.json"),
+ pools = require("../configs/pools.json")
 module.exports.run = async (bot, message, args) => {
-    var check = message.channel.id;
-    if (message.channel.type == "dm") return message.channel.send("Sorry can't do that here!");
+    var check = message.channel.id
+    var location = args[0].toString().toLowerCase()
+    var network = args[1].toString().toLowerCase()
+    var cnApiCall = pools.stratum[location] + "/" + network + pools.api.cn.stats
+    var snApiCall = pools.stratum[location] + "/verus" + pools.api.sn.stats
+    if (message.channel.type == "dm") return message.channel.send("Sorry can't do that here!")
     if (check == config.configs.chID) {
 
         // USA Stats
-        if (`${args[0]}`.toLowerCase() == "usa"){
+        if (location == "usa"){
             var locImg = "lm-us.png"
-            if (`${args[1]}`.toLowerCase() == "xmr") {
-                var api = pools.coin.xmr.apiUrl
+            if (network == "xmr") {
+                var api = cnApiCall
                 var donation = `497eMhzAuwyLj6Mct54GETCHyrmYkXVGKXxhZDfgsLJ2D7XPobiAMGZhsTrFyuxcYPJvMvdQbekWQS3DXLSuy3Y18YLcsAQ`
                 displayCN(api, donation, locImg)
             }
-            else if (`${args[1]}`.toLowerCase() == "upx") {
-                var api = pools.coin.upx.apiUrl
+            else if (network == "upx") {
+                var api = cnApiCall
                 var donation = `UPX1brGoBKBMpKuqyPSJE9424fpP4HYNy6V9XTZnTdVk36HjzcRmpJT7wbyN3CRLrJB8TTQK2wWf5XGQLkKAXCon5HiDNMRA1q`
                 displayCN(api, donation, locImg)
             }
-            else if (`${args[1]}`.toLowerCase() == "vrsc") {
-                var api = pools.coin.vrsc.apiUrl
+            else if (network == "vrsc") {
+                var api = snApiCall
                 displayKMD(api)
             }
             else {
@@ -31,15 +35,15 @@ module.exports.run = async (bot, message, args) => {
         }
         
         // BE Stats
-        else if(`${args[0]}`.toLowerCase() == "be") {
+        else if(location == "be") {
             var locImg = "lm-be.png"
-            if (`${args[1]}`.toLowerCase() == "xmr") {
-                var api = pools.coin.xmr.apiUrlBE
+            if (network == "xmr") {
+                var api = cnApiCall
                 var donation = `497eMhzAuwyLj6Mct54GETCHyrmYkXVGKXxhZDfgsLJ2D7XPobiAMGZhsTrFyuxcYPJvMvdQbekWQS3DXLSuy3Y18YLcsAQ`
                 displayCN(api, donation, locImg)
             }
-            else if (`${args[1]}`.toLowerCase() == "upx") {
-                var api = pools.coin.upx.apiUrlBE
+            else if (network == "upx") {
+                var api = cnApiCall
                 var donation = `UPX1brGoBKBMpKuqyPSJE9424fpP4HYNy6V9XTZnTdVk36HjzcRmpJT7wbyN3CRLrJB8TTQK2wWf5XGQLkKAXCon5HiDNMRA1q`
                 displayCN(api, donation, locImg)
             }

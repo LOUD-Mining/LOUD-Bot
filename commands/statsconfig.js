@@ -11,16 +11,15 @@ module.exports.run = async (bot, message, args) => {
   var walletAddress = args[1]
 
   //let's check if user has messaged the correct channel
-  let check = message.channel.id
+  let channelCheck = message.channel.id
   if(!network) return message.channel.send("You have to include a coin ticker and wallet address :man_facepalming:")
   if(!walletAddress) return message.channel.send("Wait, you didn't include the wallet address :weary:")
   if(message.channel.type !== "dm") return message.channel.send("Sorry can't do that here!")
 
   //check looks good, let's do this!
-  if(check == config.configs.chID) {
+  if(channelCheck == config.configs.chID) {
     //function to check if mining on pool
-    functions.minerCheck(network, walletAddress)
-    if (status = false) {
+    if (functions.fetchMinerStats(network, walletAddress) == false) {
       nominerEmbed = new Discord.MessageEmbed()
       .setTitle(":thinking: Are you mining to the pool?\nI cannot find your stats, so therefore I cannot register your address. :frowning:")
       .setColor("#00720D")
@@ -54,7 +53,7 @@ module.exports.run = async (bot, message, args) => {
       return memberID.send(dupeEmbed)
     } else if (status = 3) {
       changeEmbed = new Discord.MessageEmbed()
-      .setTitle("Excuse me, but you've already registered an address for " + network + ".\n" + wallet)
+      .setTitle("Excuse me, but you've already registered this address for " + network + ".")
       .setColor("#00720D")
       return memberID.send(changeEmbed)
     }
