@@ -44,9 +44,10 @@ bot.on("message", async message => {
 	if(message.author.bot.channelType == "dm") return
 	prefix = config.configs.prefix
 	messageArray = message.content.split(" ")
-	cmd = messageArray[0]
+  cmd = messageArray[0]
+  cmdPrefix = messageArray[0].charAt(0)
 	args = messageArray.slice(1)
-	
+	if (cmdPrefix != prefix) return
 	commandfile = bot.commands.get(cmd.slice(prefix.length))
   if(commandfile) message.channel.startTyping(2).then(commandfile.run(bot,message,args))
   message.channel.stopTyping(true)

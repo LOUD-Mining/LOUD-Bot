@@ -1,14 +1,23 @@
 {
   "stratum": {
-    "USA": "loudmining.com",
-    "BE": "be.loudmining.com",
-    "HK": "hk.loudmining.com"
+    "usa": "loudmining.com",
+    "be": "be.loudmining.com",
+    "hk": "hk.loudmining.com"
   },
-  "coin": {
+  "api": {
+    "cn": {
+      "stats": "/api/stats",
+      "walletStats": "/api/stats_address?address=",
+      "connectedMiners": "/api/miners_hashrate",
+      "topTen": "/api/get_top10miners"
+    },
+    "sn": {
+      "stats": "/api/stats",
+      "walletStats": "/api/worker_stats?"
+    }
+  },
+  "pool": {
     "xmr": {
-      "apiUrl": "https://loudmining.com/xmr/api/stats",
-      "apiUrlBE": "https://be.loudmining.com/xmr/api/stats",
-      "siteUrl": "https://loudmining.com/xmr",
       "ports": {
         "2100": "IOT, Low-End and Older Hardware",
         "2101": "High-End IOT, Mid-Range Hardware, Low-End GPU-Rigs",
@@ -17,9 +26,6 @@
       }
     },
     "upx": {
-      "apiUrl":"https://loudmining.com/upx/api/stats",
-      "apiUrlBE": "https://be.loudmining.com/upx/api/stats",
-      "siteUrl": "https://loudmining.com/upx",
       "ports": {
         "2000": "IOT, Low-End and Older Hardware",
         "2001": "High-End IOT, Mid-Range Hardware, Low-End GPU-Rigs",
@@ -28,9 +34,6 @@
       }
     },
     "vrsc": {
-      "apiUrl":"https://loudmining.com/verus/api/stats",
-      "apiUrlBE": "https://be.loudmining.com/verus/api/stats",
-      "siteUrl": "https://loudmining.com/verus",
       "ports": {
         "2300": "IOT, Low-End and Older Hardware, Low-Midrange GPU-Rigs",
         "2301": "High-End IOT, High-End Hardware, High-End GPU-Rigs, FPGA"

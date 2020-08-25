@@ -4,13 +4,15 @@ const Discord = require("discord.js"),
  config = require("../configs/config.json"),
  pools = require("../configs/pools.json")
 module.exports.run = async (bot, message, args) => {
-    var check = message.channel.id
-    var location = args[0].toString().toLowerCase()
-    var network = args[1].toString().toLowerCase()
-    var cnApiCall = pools.stratum[location] + "/" + network + pools.api.cn.stats
-    var snApiCall = pools.stratum[location] + "/verus" + pools.api.sn.stats
-    if (message.channel.type == "dm") return message.channel.send("Sorry can't do that here!")
-    if (check == config.configs.chID) {
+  if (!args[0]) return message.channel.send("Please enter a valid location.\ni.e. usa, be")
+  if (!args[1]) return message.channel.send("Please enter a valid network.\ni.e. upx, xmr, vrsc")
+  var check = message.channel.id
+  var location = args[0].toString().toLowerCase()
+  var network = args[1].toString().toLowerCase()
+  var cnApiCall = "https://" + pools.stratum[location] + "/" + network + pools.api.cn.stats
+  var snApiCall = "https://" + pools.stratum[location] + "/verus" + pools.api.sn.stats
+  if (message.channel.type == "dm") return message.channel.send("Sorry can't do that here!")
+  if (check == config.configs.chID) {
 
         // USA Stats
         if (location == "usa"){
