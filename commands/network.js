@@ -9,11 +9,13 @@ const Discord = require("discord.js"),
 var height
 var difficulty
 var hashrate
+var apiUrl
 
 //command
 module.exports.run = async (bot, message, args) => {
 
 //let's check if user has messaged the correct channel
+if (!args[0]) return message.channel.send("Wat R U trying to do:interrobang:")
 var check = message.channel.id
 var network = args[0].toString().toLowerCase()
 if (message.channel.type == "dm") return message.channel.send("Sorry can't do that here!")
@@ -23,7 +25,7 @@ if(check == config.configs.chID) {
     
   // check arguments and convert to lower case
   if (network == "upx") {
-    apiUrl == pools.stratum.USA + "/" + network + cnApiCall
+    apiUrl = "https://" + pools.stratum.USA + "/" + network + cnApiCall
     blkTime = 120
   
     //using node-fetch, we get the api response, parse it to json, and format for sending to discord
@@ -48,7 +50,7 @@ if(check == config.configs.chID) {
 
   // check arguments and convert to lower case
   else if (network == "xmr") {
-    apiUrl == pools.stratum.USA + "/" + network + cnApiCall
+    apiUrl = "https://" + pools.stratum.USA + "/" + network + cnApiCall
     blkTime = 120
 
     //using node-fetch we get the api response, parse it to json, and format for sending to discord
@@ -75,7 +77,7 @@ if(check == config.configs.chID) {
 
   // check arguments and convert to lower case
   else if (network == "vrsc") {
-    apiUrl = pools.stratum.USA + "/verus" + snApiCall
+    apiUrl = "https://" + pools.stratum.USA + "/verus" + snApiCall
 
     //using node-fetch we get the api response, parse it to json, and format for sending to discord
     fetch(apiUrl)

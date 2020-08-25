@@ -7,7 +7,6 @@ const config = require("./configs/config.json"),
 
 // create a new Discord Collection for the list of command files
 bot.commands = new Discord.Collection()
-
 // populate that collection with commands from files
 fs.readdir("./commands/", (err, files) => {
 
@@ -40,18 +39,17 @@ catch {
 // bot looks at messages in server and determines if it is a command or not and then runs said command
 try {
 bot.on("message", async message => {
-	message.channel.startTyping()
+	
 	if(message.author.bot) return
 	if(message.author.bot.channelType == "dm") return
-	
 	prefix = config.configs.prefix
 	messageArray = message.content.split(" ")
 	cmd = messageArray[0]
 	args = messageArray.slice(1)
 	
 	commandfile = bot.commands.get(cmd.slice(prefix.length))
-  if(commandfile) commandfile.run(bot,message,args)
-  message.channel.stopTyping()
+  if(commandfile) message.channel.startTyping(2).then(commandfile.run(bot,message,args))
+  message.channel.stopTyping(true)
 })
 
 // logs the bot into discord, make sure to edit the token.json with your own discord oauth token!
