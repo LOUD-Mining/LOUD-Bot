@@ -4,7 +4,7 @@ const Discord = require("discord.js"),
  fetch = require("node-fetch"),
  config = require("../configs/config.json"),
  pools = require("../configs/pools.json"),
- cnApiCall = pools.api.cn.stats
+ cnApiCall = pools.api.cn.stats,
  snApiCall = pools.api.sn.stats
 var height
 var difficulty

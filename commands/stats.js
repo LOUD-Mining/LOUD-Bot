@@ -29,7 +29,7 @@ module.exports.run = async (bot, message, args) => {
             }
             else if (network == "vrsc") {
                 var api = snApiCall
-                displayKMD(api)
+                displayKMD(api, locImg)
             }
             else {
                 message.channel.send(":interrobang: Please enter a valid network :interrobang: (available USA networks: xmr, upx, vrsc)")
@@ -57,7 +57,7 @@ module.exports.run = async (bot, message, args) => {
             return message.channel.send(":interrobang: Please enter a valid location:interrobang: (locations available: usa, be)")
         }
 
-        function displayCN(apicall, donationaddress) {
+        function displayCN(apicall, donationaddress, img) {
             fetch(apicall)
             .then(result => result.json())
             .then(data => {
@@ -78,9 +78,9 @@ module.exports.run = async (bot, message, args) => {
                     "interval": (data.config.paymentsInterval / 60).toFixed(1)
                 }
 
-                let CNStatsEmbed  = new Discord.MessageEmbed()
+                let CNStatsEmbed = new Discord.MessageEmbed()
                 .setTitle(args[0].toUpperCase() + " " + args[1].toUpperCase() + " Pool Statistics")
-                .setThumbnail(URL = `https://loudmining.com/media/${locImg}`)
+                .setThumbnail(URL = `https://loudmining.com/media/${img}`)
                 .setColor("#00720D")
                 .addField("Pool hashrate (PROP/SOLO): ", functions.convertHashes(prophash) + " **/** " + functions.convertHashes(solohash))
                 .addField("Pool Miners (PROP/SOLO): ", propminers.toString() + "**/**" + solominers.toString())
@@ -93,13 +93,27 @@ module.exports.run = async (bot, message, args) => {
             })
         }
 
-        function displayKMD(apicall) {
+        function displayKMD(apicall, img) {
             fetch(apicall)
             .then(
                 result => result.json()
             )
             .then(data => {
-                
+                var poolhash = data.pools.verus.hashrateString
+                var nethash = data.pools.verus.poolStats.networkSolsString
+                var netdiff = data.pools.verus.poolStats.networkDiff
+                var blkfound = data.pools.verus.poolStats.validBlocks
+
+                let SNStatsEmbed = new Discord.MessageEmbed()
+                .setTitle(args[0].toUpperCase() + " " + args[1].toUpperCase() + " Pool Statistics")
+                .setThumbnail(URL = `https://loudmining.com/media/${img}`)
+                .setColor("#00720D")
+                .addField("Pool hashrate: ", poolhash)
+                .addField("Network hashrate: ", nethash)
+                .addField("Network difficulty: ", netdiff)
+                .addField("Pool blocks found: ", blkfound)
+
+                return message.channel.send(SNStatsEmbed)
             })
         }
     }
